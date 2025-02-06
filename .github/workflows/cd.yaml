@@ -1,4 +1,4 @@
-name: CD Gitops
+name: CD GitOps
 
 on:
   push:
@@ -6,19 +6,24 @@ on:
 
 jobs:
   build:
-    name: build
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Bluid and push image to Dockerhub
-      uses: docker/build-push-action@v3
+    - name: Log in to DockerHub
+      uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_USERNAME }}/gitopsfc
+
+    - name: Build and push image to DockerHub
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/gitopsfc:latest
           ${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
