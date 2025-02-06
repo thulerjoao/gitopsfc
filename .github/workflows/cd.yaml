@@ -14,9 +14,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Bluid and push image to Dockerhub
-      uses: docker/build-push-action@v1.1.0
+      uses: docker/build-push-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/gitopsfc
-        tags: ${{ github.sha }}, latest
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/gitopsfc:latest
+          ${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}
