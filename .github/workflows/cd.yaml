@@ -16,8 +16,7 @@ jobs:
     - name: Bluid and push image to Dockerhub
       uses: docker/build-push-action@v1.1.0
       with:
-        usernamer: ${{ secrets.DOCKER_USERNAME }}
+        username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/gitopsfc
         tags: ${{ github.sha }}, latest
-        
