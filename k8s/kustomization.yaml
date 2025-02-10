@@ -8,4 +8,4 @@ resources:
 images:
 - name: goserver
   newName: thulerjoao/gitopsfc
-  newTag: 6e73e329d152877db3e316c8ce452b973fad83a5
+  newTag: 4ad959214978e3f79f1990685c8e550be516163a
